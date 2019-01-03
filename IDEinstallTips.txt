@@ -1,0 +1,14 @@
+The udev rules have been updated.  Some distributions require that you re-start your computer for the changes to take effect otherwise USB communications and/or hotplug will not work.
+
+You are using systemd. 
+
+MPLAB X IDE and IPE use systemd to handle USB plug and play events. They do this by using sockets as an interprocess communications mechanism.
+
+Please make sure that interprocess communications under systemd are allowed in the local host. Some Linux distributions do not allow interprocess communications. For example, if the following option is set in the systemd-udevd unit configuration file:
+   IPAddressDeny=any
+
+then MPLAB X communications library will not be able to handle plug and play events. You might need to create an override file containing this option:
+   IPAddressAllow=localhost
+
+
+
